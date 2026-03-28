@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foster Creative Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.10);
+      width: 100%;
+      max-width: 380px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card-top {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      padding: 2.2rem 1.5rem 1.8rem;
+    }
+
+    .logo {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: #e8c84a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin: 0 auto 1rem;
+      letter-spacing: -1px;
+    }
+
+    .card-top h1 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .card-top p {
+      color: #9aadcc;
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 1.8rem 1.5rem 2rem;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8f9ff;
+      border: 0.5px solid #e2e6f3;
+      border-radius: 12px;
+      padding: 11px 14px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .info-row .icon { font-size: 16px; flex-shrink: 0; }
+    .info-row .label { font-size: 11px; color: #888; font-weight: 500; }
+    .info-row .value { font-size: 13.5px; color: #1a1a2e; font-weight: 600; }
+
+    .divider { height: 0.5px; background: #eee; margin: 1.2rem 0; }
+
+    .save-btn {
+      width: 100%;
+      padding: 13px;
+      background: #fff;
+      color: #1a1a2e;
+      border: 1.5px solid #e2e6f3;
+      border-radius: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .save-btn:hover { background: #f4f6fb; border-color: #c5cde8; }
+    .save-btn:active { transform: scale(0.98); }
+
+    .note {
+      font-size: 11.5px;
+      color: #aaa;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    .website-link {
+      display: block;
+      margin-top: 1.2rem;
+      font-size: 12px;
+      color: #3d4ec6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .website-link:hover { text-decoration: underline; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a2e;
+      color: #fff;
+      padding: 13px 22px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-top">
+    <div class="logo">FC</div>
+    <h1>Foster Creative Agency</h1>
+    <p>Creative &amp; Marketing Agency</p>
+  </div>
+
+  <div class="card-body">
+
+    <div class="info-row">
+      <span class="icon">📞</span>
+      <div>
+        <div class="label">WhatsApp</div>
+        <div class="value">+91 84870 56186</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <span class="icon">📍</span>
+      <div>
+        <div class="label">Location</div>
+        <div class="value">Vadodara, Gujarat, India</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <span class="icon">🌐</span>
+      <div>
+        <div class="label">Website</div>
+        <div class="value">fostercreativeagency.com</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Save Contact Button -->
+    <button class="save-btn" onclick="saveContact()">
+      👤 Save Contact
+    </button>
+
+    <p class="note">Tap "Save Contact" to add Foster Creative Agency directly to your phone contacts.</p>
+
+    <a class="website-link" href="https://www.fostercreativeagency.com" target="_blank">🌐 Visit Website →</a>
+
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">✅ Contact saved! Open your Contacts app.</div>
+
+<script>
+  function saveContact() {
+    const vcf = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "FN:Foster Creative Agency",
+      "ORG:Foster Creative Agency",
+      "TEL;TYPE=CELL:+918487056186",
+      "URL:https://www.fostercreativeagency.com",
+      "EMAIL:info@fostercreativeagency.com",
+      "NOTE:Creative & Marketing Agency - Vadodara, Gujarat, India",
+      "END:VCARD"
+    ].join("\n");
+
+    const blob = new Blob([vcf], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Foster_Creative_Agency.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // Show toast
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+</script>
+
+</body>
+</html>
